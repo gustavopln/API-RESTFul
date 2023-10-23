@@ -25,11 +25,39 @@ async function post(req, res){
 
     product.save()
 
-    res.send()
+    res.send({
+        message: 'success',
+    })
 
 }
 
+async function put(req, res){
+    const { id } = req.params
+
+    /* const product = await ProductsModel.findOne({ _id: id })
+
+    await product.updateOne(req.body)
+
+    res.send({
+        message: 'success',
+        product,
+    })*/
+    
+    //Outra maneira de realizar o update retornando a informação atualizada no res.send
+/*1 - id do registro que queremos selecionar
+2 - valor que queremos alterar
+3 - se queremos que retorne o objeto novo, atualizado*/
+
+const product = await ProductsModel.findOneAndUpdate({ _id: id }, req.body, { new: true})
+
+res.send({
+    message: 'success',
+    product,
+})
+
+} 
 module.exports = {
     get,
     post,
+    put,
 }
