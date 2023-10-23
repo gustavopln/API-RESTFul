@@ -12,7 +12,11 @@ const app = express()
 db.connect()
 
 // definindo um middleware para habilitar server para receber dados via post (formulário)
-app.use(express.urlencoded({ extended: true}))
+ //Não será necessário em uma API porque estamos recebendo no corpo da requisição
+//app.use(express.urlencoded({ extended: true}))
+
+// habilita server para receber dados em formato json
+app.use(express.json())
 
 // definindo as rotas da aplicação
 app.use('/api', routes)
