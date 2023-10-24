@@ -42,7 +42,7 @@ async function put(req, res){
         message: 'success',
         product,
     })*/
-    
+
     //Outra maneira de realizar o update retornando a informação atualizada no res.send
 /*1 - id do registro que queremos selecionar
 2 - valor que queremos alterar
@@ -56,8 +56,22 @@ res.send({
 })
 
 } 
+
+async function remove(req, res){
+    const { id } = req.params
+
+    const remove = await ProductsModel.deleteOne({ _id: id })
+    
+    const message = remove.deletedCount == 1 ? 'success' : 'error'    
+
+    res.send({
+        message,
+    })
+}
+
 module.exports = {
     get,
     post,
     put,
+    remove,
 }
